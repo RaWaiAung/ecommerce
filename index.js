@@ -6,7 +6,9 @@ import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import productRoute from "./routes/products.js";
 import userRoute from "./routes/users.js";
-import ImportData from "./DataImport.js";
+import orderRoute from "./routes/orders.js";
+import categoryRoute from "./routes/categories.js";
+
 const app = express();
 
 dotenv.config();
@@ -16,9 +18,10 @@ app.options('*', cors());
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
 
-app.use("/api/v1", productRoute);
+app.use("/api/v1/products", productRoute);
 app.use("/api/v1/users", userRoute);
-app.use("/api/import", ImportData);
+app.use("/api/v1/orders", orderRoute);
+app.use("/api/v1/categories", categoryRoute);
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
